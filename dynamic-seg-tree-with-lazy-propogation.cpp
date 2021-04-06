@@ -64,15 +64,13 @@ public:
     
     int query(Node* p,int s,int e,int l, int r) {
         if(p->lazy) {
-            if(s!=e) {
-                p->val=p->val+p->lazy;
-                if(s!=e) { 
-                    p->extend();
-                    p->left->lazy+=p->lazy;
-                    p->right->lazy+=p->lazy;
-                }
-                p->lazy=0;
+            p->val+=p->lazy;
+            if(s!=e) { 
+                p->extend();
+                p->left->lazy+=p->lazy;
+                p->right->lazy+=p->lazy;
             }
+            p->lazy=0;
         }
         
         if(s>r || e<l) return 0;
